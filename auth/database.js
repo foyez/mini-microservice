@@ -8,7 +8,9 @@ const sequelize = new Sequelize(process.env.POSTGRES_URL, {
 sequelize
   .authenticate()
   .then(() =>
-    console.log("auth service: Connection has been established successfully.")
+    console.log(
+      "auth service: Database connection has been established successfully."
+    )
   )
   .catch((error) =>
     console.error("auth service: Unable to connect to the database:", error)
