@@ -15,7 +15,7 @@ const initRabbitMQ = async (queueName, { durable } = { durable: true }) => {
     // });
 
     await channel.assertQueue(queueName, { durable });
-    console.log(`${queueName} service: Connected to RabbitMQ`);
+    console.log(`Connected to RabbitMQ`);
   } catch (error) {
     console.error("Failed to connect to RabbitMQ:", error);
     process.exit(1);

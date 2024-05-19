@@ -5,7 +5,7 @@
 ## Run app using k8s
 
 ```sh
-# first create mini-ecommerce namespace
+# first, create a mini-ecommerce namespace
 kubectl create namespace mini-ecommerce
 
 # start skaffold

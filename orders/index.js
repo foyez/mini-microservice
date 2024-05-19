@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3003;
 const app = express();
 app.use(express.json());
 
-app.get("/orders", async (_req, res) => {
+app.get("/api/orders", async (_req, res) => {
   const results = await Order.findAll();
   res.json(results);
 });

@@ -5,7 +5,4 @@ metadata:
   namespace: mini-ecommerce
 data:
   SERVICE: auth
-  POSTGRES_HOST: postgresql-service
-  POSTGRES_DB: mini_ecommerce
-  POSTGRES_PORT: "5432"
   PORT: "3001"

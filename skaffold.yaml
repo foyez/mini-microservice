@@ -16,4 +16,22 @@ build:
         manual:
           - src: "**/*.js"
             dest: .
+
+    - image: foyezar/ecommerce-products
+      context: products
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .
+
+    - image: foyezar/ecommerce-orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .
   

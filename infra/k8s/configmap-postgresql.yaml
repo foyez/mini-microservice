@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-config
+  namespace: mini-ecommerce
+data:
+  POSTGRES_HOST: postgresql-service
+  POSTGRES_DB: mini_ecommerce
+  POSTGRES_PORT: "5432"

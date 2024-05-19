@@ -20,12 +20,12 @@ const PORT = process.env.PORT || 3002;
 const app = express();
 app.use(express.json());
 
-app.get("/products", async (req, res) => {
+app.get("/api/products", async (req, res) => {
   const results = await Product.findAll();
   res.json(results);
 });
 
-app.post("/products", isAuth, async (req, res) => {
+app.post("/api/products", isAuth, async (req, res) => {
   const { name, price, description, imageURL } = req.body;
 
   const product = await Product.create({
@@ -39,7 +39,7 @@ app.post("/products", isAuth, async (req, res) => {
   res.status(201).json(product);
 });
 
-app.post("/products/buy", isAuth, async (req, res) => {
+app.post("/api/products/buy", isAuth, async (req, res) => {
   const { productIds } = req.body;
 
   const products = await Product.findAll({

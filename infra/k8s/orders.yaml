@@ -1,38 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-deployment
+  name: orders-deployment
   namespace: mini-ecommerce
 spec:
   selector:
     matchLabels:
-      app: auth
+      app: orders
   replicas: 1
   template:
     metadata:
       labels:
-        app: auth
+        app: orders
     spec:
       containers:
-        - name: auth
-          image: foyezar/ecommerce-auth
+        - name: orders
+          image: foyezar/ecommerce-orders
           ports:
-            - containerPort: 3001
+            - containerPort: 3003
           env:
             - name: Service
               valueFrom:
                 configMapKeyRef:
-                  name: auth-config
+                  name: orders-config
                   key: SERVICE
             - name: PORT
               valueFrom:
                 configMapKeyRef:
-                  name: auth-config
+                  name: orders-config
                   key: PORT
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: auth-secret
+                  name: orders-secret
                   key: JWT_SECRET
             - name: POSTGRES_HOST
               valueFrom:
@@ -61,6 +61,33 @@ spec:
                   key: POSTGRES_PASSWORD
             - name: POSTGRES_URL
               value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(POSTGRES_HOST):$(POSTGRES_PORT)/$(POSTGRES_DB)?sslmode=disable"
+            - name: ORDER_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  name: orders-config
+                  key: ORDER_QUEUE
+            - name: RABBITMQ_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbitmq-config
+                  key: RABBITMQ_HOST
+            - name: RABBITMQ_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: rabbitmq-config
+                  key: RABBITMQ_PORT
+            - name: RABBITMQ_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: RABBITMQ_DEFAULT_USER
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: RABBITMQ_DEFAULT_PASS
+            - name: AMQP_URL
+              value: "amqp://$(RABBITMQ_DEFAULT_USER):$(RABBITMQ_DEFAULT_PASS)@$(RABBITMQ_HOST):$(RABBITMQ_PORT)"
           resources:
             requests:
               memory: "128Mi"
@@ -73,12 +100,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-service
+  name: orders-service
   namespace: mini-ecommerce
 spec:
   selector:
-    app: auth
+    app: orders
   ports:
     - protocol: TCP
-      port: 3001
-      targetPort: 3001
+      port: 3003
+      targetPort: 3003

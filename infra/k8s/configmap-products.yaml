@@ -5,3 +5,5 @@ metadata:
   namespace: mini-ecommerce
 data:
   SERVICE: products
+  PORT: "3002"
+  ORDER_QUEUE: order
