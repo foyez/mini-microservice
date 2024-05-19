@@ -1,0 +1,27 @@
+services:
+  auth:
+    build:
+      args:
+        - NODE_ENV=development
+      target: dev # Use the dev stage
+    volumes:
+      - ../../auth:/app # Mount the auth directory to /app (read-only and workdir)
+      - /app/node_modules # Prevents node_modules from being overwritten
+
+  products:
+    build:
+      args:
+        - NODE_ENV=development
+      target: dev # Use the dev stage
+    volumes:
+      - ../../products:/app # Mount the products directory to /app (read-only and workdir)
+      - /app/node_modules # Prevents node_modules from being overwritten
+
+  orders:
+    build:
+      args:
+        - NODE_ENV=development
+      target: dev # Use the dev stage
+    volumes:
+      - ../../orders:/app # Mount the orders directory to /app (read-only and workdir)
+      - /app/node_modules # Prevents node_modules from being overwritten
