@@ -1,6 +1,6 @@
 # Mini Microservice
 
-> A microservice designed to implement microservice logic, utilizing Docker and Kubernetes.
+> A microservice designed to implement microservice architecture, utilizing Docker and Kubernetes.
 
 ## Run app using k8s
 
